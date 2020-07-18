@@ -2,11 +2,9 @@ package com.stylefeng.guns.rest.modular.auth.filter;
 
 import com.stylefeng.guns.api.base.tips.ErrorTip;
 import com.stylefeng.guns.api.util.RenderUtil;
-import com.stylefeng.guns.rest.common.CurrentUser;
 import com.stylefeng.guns.rest.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.rest.config.properties.JwtProperties;
 import com.stylefeng.guns.rest.modular.auth.util.JwtTokenUtil;
-import com.stylefeng.guns.rest.modular.vo.ResponseVo;
 import io.jsonwebtoken.JwtException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,31 +39,11 @@ public class AuthFilter extends OncePerRequestFilter {
             chain.doFilter(request, response);
             return;
         }
-        //System.out.println("我执行了doFilter");
-        //配置忽略列表
-        String ignoreUrl = jwtProperties.getIgnoreUrl();
-        String[] ignoreUrls = ignoreUrl.split(",");
-        for(String a :ignoreUrls){
-            if(a.equals(request.getServletPath())){
-                chain.doFilter(request, response);
-                return;
-            }
-        }
-
         final String requestHeader = request.getHeader(jwtProperties.getHeader());
         String authToken = null;
-
         if (requestHeader != null && requestHeader.startsWith("Bearer ")) {
             authToken = requestHeader.substring(7);
-            System.out.println("authToken"+authToken);
-            //通过token获取userid,并且将他存到threadlocal
-            String userid =  jwtTokenUtil.getUsernameFromToken(authToken);
-            if(userid == null) {
-                return;
-            }else {
-                System.out.println("保存的userid  = "+userid);
-                CurrentUser.saveUserID(userid);
-            }
+
             //验证token是否过期,包含了验证jwt是否正确
             try {
                 boolean flag = jwtTokenUtil.isTokenExpired(authToken);
