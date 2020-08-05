@@ -8,8 +8,8 @@ package com.stylefeng.guns.api.common.constant.cache;
  */
 public interface Cache {
 
-    /**
-     * 常量缓存
-     */
-    String CONSTANT = "CONSTANT";
+  /**
+   * 常量缓存
+   */
+  String CONSTANT = "CONSTANT";
 }

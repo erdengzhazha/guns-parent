@@ -11,105 +11,105 @@ import com.stylefeng.guns.generator.engine.config.*;
  */
 public class AbstractTemplateEngine {
 
-    protected ContextConfig contextConfig;                //全局配置
-    protected ControllerConfig controllerConfig;          //控制器的配置
-    protected PageConfig pageConfig;                      //页面的控制器
-    protected DaoConfig daoConfig;                        //Dao配置
-    protected ServiceConfig serviceConfig;                //Service配置
-    protected SqlConfig sqlConfig;                        //sql配置
-    protected TableInfo tableInfo;                        //表的信息
+  protected ContextConfig contextConfig;                //全局配置
+  protected ControllerConfig controllerConfig;          //控制器的配置
+  protected PageConfig pageConfig;                      //页面的控制器
+  protected DaoConfig daoConfig;                        //Dao配置
+  protected ServiceConfig serviceConfig;                //Service配置
+  protected SqlConfig sqlConfig;                        //sql配置
+  protected TableInfo tableInfo;                        //表的信息
 
-    public void initConfig() {
-        if (this.contextConfig == null) {
-            this.contextConfig = new ContextConfig();
-        }
-        if (this.controllerConfig == null) {
-            this.controllerConfig = new ControllerConfig();
-        }
-        if (this.pageConfig == null) {
-            this.pageConfig = new PageConfig();
-        }
-        if (this.daoConfig == null) {
-            this.daoConfig = new DaoConfig();
-        }
-        if (this.serviceConfig == null) {
-            this.serviceConfig = new ServiceConfig();
-        }
-        if (this.sqlConfig == null) {
-            this.sqlConfig = new SqlConfig();
-        }
-        this.contextConfig.init();
-
-        this.controllerConfig.setContextConfig(this.contextConfig);
-        this.controllerConfig.init();
-
-        this.serviceConfig.setContextConfig(this.contextConfig);
-        this.serviceConfig.init();
-
-        this.daoConfig.setContextConfig(this.contextConfig);
-        this.daoConfig.init();
-
-        this.pageConfig.setContextConfig(this.contextConfig);
-        this.pageConfig.init();
-
-        this.sqlConfig.setContextConfig(this.contextConfig);
-        this.sqlConfig.init();
+  public void initConfig() {
+    if (this.contextConfig == null) {
+      this.contextConfig = new ContextConfig();
     }
-
-    public PageConfig getPageConfig() {
-        return pageConfig;
+    if (this.controllerConfig == null) {
+      this.controllerConfig = new ControllerConfig();
     }
-
-    public void setPageConfig(PageConfig pageConfig) {
-        this.pageConfig = pageConfig;
+    if (this.pageConfig == null) {
+      this.pageConfig = new PageConfig();
     }
-
-    public ContextConfig getContextConfig() {
-        return contextConfig;
+    if (this.daoConfig == null) {
+      this.daoConfig = new DaoConfig();
     }
-
-    public void setContextConfig(ContextConfig contextConfig) {
-        this.contextConfig = contextConfig;
+    if (this.serviceConfig == null) {
+      this.serviceConfig = new ServiceConfig();
     }
-
-    public ControllerConfig getControllerConfig() {
-        return controllerConfig;
+    if (this.sqlConfig == null) {
+      this.sqlConfig = new SqlConfig();
     }
+    this.contextConfig.init();
 
-    public void setControllerConfig(ControllerConfig controllerConfig) {
-        this.controllerConfig = controllerConfig;
-    }
+    this.controllerConfig.setContextConfig(this.contextConfig);
+    this.controllerConfig.init();
 
-    public DaoConfig getDaoConfig() {
-        return daoConfig;
-    }
+    this.serviceConfig.setContextConfig(this.contextConfig);
+    this.serviceConfig.init();
 
-    public void setDaoConfig(DaoConfig daoConfig) {
-        this.daoConfig = daoConfig;
-    }
+    this.daoConfig.setContextConfig(this.contextConfig);
+    this.daoConfig.init();
 
-    public ServiceConfig getServiceConfig() {
-        return serviceConfig;
-    }
+    this.pageConfig.setContextConfig(this.contextConfig);
+    this.pageConfig.init();
 
-    public void setServiceConfig(ServiceConfig serviceConfig) {
-        this.serviceConfig = serviceConfig;
-    }
+    this.sqlConfig.setContextConfig(this.contextConfig);
+    this.sqlConfig.init();
+  }
 
-    public SqlConfig getSqlConfig() {
-        return sqlConfig;
-    }
+  public PageConfig getPageConfig() {
+    return pageConfig;
+  }
 
-    public void setSqlConfig(SqlConfig sqlConfig) {
-        this.sqlConfig = sqlConfig;
-    }
+  public void setPageConfig(PageConfig pageConfig) {
+    this.pageConfig = pageConfig;
+  }
 
-    public TableInfo getTableInfo() {
-        return tableInfo;
-    }
+  public ContextConfig getContextConfig() {
+    return contextConfig;
+  }
 
-    public void setTableInfo(TableInfo tableInfo) {
-        this.tableInfo = tableInfo;
-    }
+  public void setContextConfig(ContextConfig contextConfig) {
+    this.contextConfig = contextConfig;
+  }
+
+  public ControllerConfig getControllerConfig() {
+    return controllerConfig;
+  }
+
+  public void setControllerConfig(ControllerConfig controllerConfig) {
+    this.controllerConfig = controllerConfig;
+  }
+
+  public DaoConfig getDaoConfig() {
+    return daoConfig;
+  }
+
+  public void setDaoConfig(DaoConfig daoConfig) {
+    this.daoConfig = daoConfig;
+  }
+
+  public ServiceConfig getServiceConfig() {
+    return serviceConfig;
+  }
+
+  public void setServiceConfig(ServiceConfig serviceConfig) {
+    this.serviceConfig = serviceConfig;
+  }
+
+  public SqlConfig getSqlConfig() {
+    return sqlConfig;
+  }
+
+  public void setSqlConfig(SqlConfig sqlConfig) {
+    this.sqlConfig = sqlConfig;
+  }
+
+  public TableInfo getTableInfo() {
+    return tableInfo;
+  }
+
+  public void setTableInfo(TableInfo tableInfo) {
+    this.tableInfo = tableInfo;
+  }
 }
 

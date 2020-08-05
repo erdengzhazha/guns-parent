@@ -15,31 +15,31 @@ import java.security.Key;
  */
 public class JWTTest {
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-        Key key = MacProvider.generateKey();
+    Key key = MacProvider.generateKey();
 
-        String compactJws = Jwts.builder()
-                .setSubject("Joe")
-                .setClaims(new DefaultClaims().setId(IdGenerator.getId()))
-                .signWith(SignatureAlgorithm.HS512, key)
-                .compact();
+    String compactJws = Jwts.builder()
+      .setSubject("Joe")
+      .setClaims(new DefaultClaims().setId(IdGenerator.getId()))
+      .signWith(SignatureAlgorithm.HS512, key)
+      .compact();
 
-        System.out.println(compactJws);
+    System.out.println(compactJws);
 
 
-        assert Jwts.parser().setSigningKey(key).parseClaimsJws(compactJws).getBody().getSubject().equals("Joe");
+    assert Jwts.parser().setSigningKey(key).parseClaimsJws(compactJws).getBody().getSubject().equals("Joe");
 
-        try {
-            Claims body = Jwts.parser().setSigningKey(key).parseClaimsJws(compactJws).getBody();
-            System.out.println(body);
-            System.out.println(body.getExpiration());
+    try {
+      Claims body = Jwts.parser().setSigningKey(key).parseClaimsJws(compactJws).getBody();
+      System.out.println(body);
+      System.out.println(body.getExpiration());
 
-            System.out.println("trust");
-        } catch (SignatureException e) {
-            System.out.println("not trust");
-        } catch (ExpiredJwtException e) {
-            System.out.println("ExpiredJwtException");
-        }
+      System.out.println("trust");
+    } catch (SignatureException e) {
+      System.out.println("not trust");
+    } catch (ExpiredJwtException e) {
+      System.out.println("ExpiredJwtException");
     }
+  }
 }

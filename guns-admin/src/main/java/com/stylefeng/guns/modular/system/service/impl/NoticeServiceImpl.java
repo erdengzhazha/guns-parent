@@ -20,8 +20,8 @@ import java.util.Map;
 @Service
 public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> implements INoticeService {
 
-    @Override
-    public List<Map<String, Object>> list(String condition) {
-        return this.baseMapper.list(condition);
-    }
+  @Override
+  public List<Map<String, Object>> list(String condition) {
+    return this.baseMapper.list(condition);
+  }
 }

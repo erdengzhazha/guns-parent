@@ -20,40 +20,40 @@ import static org.junit.Assert.assertTrue;
  */
 public class DeptTest extends BaseJunit {
 
-    @Resource
-    DeptMapper deptMapper;
+  @Resource
+  DeptMapper deptMapper;
 
-    @Test
-    public void addDeptTest() {
-        Dept dept = new Dept();
-        dept.setFullname("测试fullname");
-        dept.setNum(5);
-        dept.setPid(1);
-        dept.setSimplename("测试");
-        dept.setTips("测试tips");
-        dept.setVersion(1);
-        Integer insert = deptMapper.insert(dept);
-        assertEquals(insert, new Integer(1));
-    }
+  @Test
+  public void addDeptTest() {
+    Dept dept = new Dept();
+    dept.setFullname("测试fullname");
+    dept.setNum(5);
+    dept.setPid(1);
+    dept.setSimplename("测试");
+    dept.setTips("测试tips");
+    dept.setVersion(1);
+    Integer insert = deptMapper.insert(dept);
+    assertEquals(insert, new Integer(1));
+  }
 
-    @Test
-    public void updateTest() {
-        Dept dept = this.deptMapper.selectById(24);
-        dept.setTips("哈哈");
-        boolean flag = dept.updateById();
-        assertTrue(flag);
-    }
+  @Test
+  public void updateTest() {
+    Dept dept = this.deptMapper.selectById(24);
+    dept.setTips("哈哈");
+    boolean flag = dept.updateById();
+    assertTrue(flag);
+  }
 
-    @Test
-    public void deleteTest() {
-        Dept dept = this.deptMapper.selectById(24);
-        Integer integer = deptMapper.deleteById(dept);
-        assertTrue(integer > 0);
-    }
+  @Test
+  public void deleteTest() {
+    Dept dept = this.deptMapper.selectById(24);
+    Integer integer = deptMapper.deleteById(dept);
+    assertTrue(integer > 0);
+  }
 
-    @Test
-    public void listTest() {
-        List<Map<String, Object>> list = this.deptMapper.list("总公司");
-        assertTrue(list.size() > 0);
-    }
+  @Test
+  public void listTest() {
+    List<Map<String, Object>> list = this.deptMapper.list("总公司");
+    assertTrue(list.size() > 0);
+  }
 }

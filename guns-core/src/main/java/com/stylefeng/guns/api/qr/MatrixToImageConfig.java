@@ -25,7 +25,7 @@ public final class MatrixToImageConfig {
 
   public static final int BLACK = 0xFF000000;
   public static final int WHITE = 0xFFFFFFFF;
-  
+
   private final int onColor;
   private final int offColor;
 
@@ -38,7 +38,7 @@ public final class MatrixToImageConfig {
   }
 
   /**
-   * @param onColor pixel on color, specified as an ARGB value as an int
+   * @param onColor  pixel on color, specified as an ARGB value as an int
    * @param offColor pixel off color, specified as an ARGB value as an int
    */
   public MatrixToImageConfig(int onColor, int offColor) {

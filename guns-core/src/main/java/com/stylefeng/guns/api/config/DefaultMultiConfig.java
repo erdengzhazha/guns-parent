@@ -15,8 +15,8 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnProperty(prefix = "guns", name = "muti-datasource-open", havingValue = "true")
 public class DefaultMultiConfig {
 
-    @Bean
-    public MultiSourceExAop multiSourceExAop() {
-        return new MultiSourceExAop();
-    }
+  @Bean
+  public MultiSourceExAop multiSourceExAop() {
+    return new MultiSourceExAop();
+  }
 }

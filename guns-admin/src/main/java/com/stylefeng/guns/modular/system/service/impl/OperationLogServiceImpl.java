@@ -21,8 +21,8 @@ import java.util.Map;
 @Service
 public class OperationLogServiceImpl extends ServiceImpl<OperationLogMapper, OperationLog> implements IOperationLogService {
 
-    @Override
-    public List<Map<String, Object>> getOperationLogs(Page<OperationLog> page, String beginTime, String endTime, String logName, String s, String orderByField, boolean asc) {
-        return this.baseMapper.getOperationLogs(page, beginTime, endTime, logName, s, orderByField, asc);
-    }
+  @Override
+  public List<Map<String, Object>> getOperationLogs(Page<OperationLog> page, String beginTime, String endTime, String logName, String s, String orderByField, boolean asc) {
+    return this.baseMapper.getOperationLogs(page, beginTime, endTime, logName, s, orderByField, asc);
+  }
 }

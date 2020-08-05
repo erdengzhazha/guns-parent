@@ -16,10 +16,10 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:/default-config.properties")
 public class DefaultProperties {
 
-    @Bean
-    @ConfigurationProperties(prefix = "spring.datasource")
-    public DruidProperties druidProperties() {
-        return new DruidProperties();
-    }
+  @Bean
+  @ConfigurationProperties(prefix = "spring.datasource")
+  public DruidProperties druidProperties() {
+    return new DruidProperties();
+  }
 
 }

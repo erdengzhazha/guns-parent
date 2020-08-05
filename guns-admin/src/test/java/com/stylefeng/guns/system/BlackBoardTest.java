@@ -18,12 +18,12 @@ import static org.junit.Assert.assertTrue;
  */
 public class BlackBoardTest extends BaseJunit {
 
-    @Autowired
-    NoticeMapper noticeMapper;
+  @Autowired
+  NoticeMapper noticeMapper;
 
-    @Test
-    public void blackBoardTest() {
-        List<Map<String, Object>> notices = noticeMapper.list(null);
-        assertTrue(notices.size() > 0);
-    }
+  @Test
+  public void blackBoardTest() {
+    List<Map<String, Object>> notices = noticeMapper.list(null);
+    assertTrue(notices.size() > 0);
+  }
 }

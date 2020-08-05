@@ -22,50 +22,49 @@ import java.io.UnsupportedEncodingException;
  */
 public class BeetlConfiguration extends BeetlGroupUtilConfiguration {
 
-    @Autowired
-    Environment env;
+  @Autowired
+  Environment env;
 
-    @Autowired
-    ApplicationContext applicationContext;
+  @Autowired
+  ApplicationContext applicationContext;
 
-    @Autowired
-    DictSelectorTag dictSelectorTag;
+  @Autowired
+  DictSelectorTag dictSelectorTag;
 
 
+  @Override
+  public void initOther() {
+    groupTemplate.registerFunctionPackage("shiro", new ShiroExt());
+    groupTemplate.registerFunctionPackage("tool", new ToolUtil());
+    groupTemplate.registerFunctionPackage("kaptcha", new KaptchaUtil());
+    groupTemplate.registerTagFactory("dictSelector", new TagFactory() {
+      @Override
+      public Tag createTag() {
+        return dictSelectorTag;
+      }
+    });
 
-    @Override
-    public void initOther() {
-        groupTemplate.registerFunctionPackage("shiro", new ShiroExt());
-        groupTemplate.registerFunctionPackage("tool", new ToolUtil());
-        groupTemplate.registerFunctionPackage("kaptcha", new KaptchaUtil());
-        groupTemplate.registerTagFactory("dictSelector", new TagFactory() {
-            @Override
-            public Tag createTag() {
-                return dictSelectorTag;
-            }
-        });
+    groupTemplate.registerFunction("env", new Function() {
+      @Override
+      public String call(Object[] paras, Context ctx) {
+        String key = (String) paras[0];
+        String value = env.getProperty(key);
+        if (value != null) {
+          return getStr(value);
+        }
+        if (paras.length == 2) {
+          return (String) paras[1];
+        }
+        return null;
+      }
 
-        groupTemplate.registerFunction("env", new Function() {
-            @Override
-            public String call(Object[] paras, Context ctx) {
-                String key = (String)paras[0];
-                String value =  env.getProperty(key);
-                if(value!=null) {
-                    return getStr(value);
-                }
-                if(paras.length==2) {
-                    return (String)paras[1];
-                }
-                return null;
-            }
-
-            protected String getStr(String str) {
-                try {
-                    return new String(str.getBytes("iso8859-1"),"UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-    }
+      protected String getStr(String str) {
+        try {
+          return new String(str.getBytes("iso8859-1"), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    });
+  }
 }

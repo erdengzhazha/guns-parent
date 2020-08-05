@@ -18,17 +18,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class SessionHolderInterceptor extends BaseController {
 
-    @Pointcut("execution(* com.stylefeng.guns.*..controller.*.*(..))")
-    public void cutService() {
-    }
+  @Pointcut("execution(* com.stylefeng.guns.*..controller.*.*(..))")
+  public void cutService() {
+  }
 
-    @Around("cutService()")
-    public Object sessionKit(ProceedingJoinPoint point) throws Throwable {
-        HttpSessionHolder.put(super.getHttpServletRequest().getSession());
-        try {
-            return point.proceed();
-        } finally {
-            HttpSessionHolder.remove();
-        }
+  @Around("cutService()")
+  public Object sessionKit(ProceedingJoinPoint point) throws Throwable {
+    HttpSessionHolder.put(super.getHttpServletRequest().getSession());
+    try {
+      return point.proceed();
+    } finally {
+      HttpSessionHolder.remove();
     }
+  }
 }

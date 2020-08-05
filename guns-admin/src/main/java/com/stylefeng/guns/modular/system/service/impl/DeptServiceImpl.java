@@ -18,30 +18,30 @@ import java.util.Map;
 @Transactional
 public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements IDeptService {
 
-    @Resource
-    private DeptMapper deptMapper;
+  @Resource
+  private DeptMapper deptMapper;
 
-    @Override
-    public void deleteDept(Integer deptId) {
-        Dept dept = deptMapper.selectById(deptId);
+  @Override
+  public void deleteDept(Integer deptId) {
+    Dept dept = deptMapper.selectById(deptId);
 
-        Wrapper<Dept> wrapper = new EntityWrapper<>();
-        wrapper = wrapper.like("pids", "%[" + dept.getId() + "]%");
-        List<Dept> subDepts = deptMapper.selectList(wrapper);
-        for (Dept temp : subDepts) {
-            temp.deleteById();
-        }
-
-        dept.deleteById();
+    Wrapper<Dept> wrapper = new EntityWrapper<>();
+    wrapper = wrapper.like("pids", "%[" + dept.getId() + "]%");
+    List<Dept> subDepts = deptMapper.selectList(wrapper);
+    for (Dept temp : subDepts) {
+      temp.deleteById();
     }
 
-    @Override
-    public List<ZTreeNode> tree() {
-        return this.baseMapper.tree();
-    }
+    dept.deleteById();
+  }
 
-    @Override
-    public List<Map<String, Object>> list(String condition) {
-        return this.baseMapper.list(condition);
-    }
+  @Override
+  public List<ZTreeNode> tree() {
+    return this.baseMapper.tree();
+  }
+
+  @Override
+  public List<Map<String, Object>> list(String condition) {
+    return this.baseMapper.list(condition);
+  }
 }

@@ -20,16 +20,16 @@ import java.util.Map;
 @RequestMapping("/blackboard")
 public class BlackboardController extends BaseController {
 
-    @Autowired
-    private INoticeService noticeService;
+  @Autowired
+  private INoticeService noticeService;
 
-    /**
-     * 跳转到黑板
-     */
-    @RequestMapping("")
-    public String blackboard(Model model) {
-        List<Map<String, Object>> notices = noticeService.list(null);
-        model.addAttribute("noticeList", notices);
-        return "/blackboard.html";
-    }
+  /**
+   * 跳转到黑板
+   */
+  @RequestMapping("")
+  public String blackboard(Model model) {
+    List<Map<String, Object>> notices = noticeService.list(null);
+    model.addAttribute("noticeList", notices);
+    return "/blackboard.html";
+  }
 }

@@ -16,14 +16,14 @@ import java.util.Map;
 @Service
 public class TableService {
 
-    @Value("${spring.datasource.db-name}")
-    private String dbName;
+  @Value("${spring.datasource.db-name}")
+  private String dbName;
 
-    /**
-     * 获取当前数据库所有的表信息
-     */
-    public List<Map<String, Object>> getAllTables() {
-        String sql = "select TABLE_NAME as tableName,TABLE_COMMENT as tableComment from information_schema.`TABLES` where TABLE_SCHEMA = '" + dbName + "'";
-        return SqlRunner.db().selectList(sql);
-    }
+  /**
+   * 获取当前数据库所有的表信息
+   */
+  public List<Map<String, Object>> getAllTables() {
+    String sql = "select TABLE_NAME as tableName,TABLE_COMMENT as tableComment from information_schema.`TABLES` where TABLE_SCHEMA = '" + dbName + "'";
+    return SqlRunner.db().selectList(sql);
+  }
 }

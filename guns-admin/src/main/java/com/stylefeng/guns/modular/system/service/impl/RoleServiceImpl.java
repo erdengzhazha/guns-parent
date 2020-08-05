@@ -18,56 +18,56 @@ import java.util.Map;
 @Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IRoleService {
 
-    @Resource
-    private RoleMapper roleMapper;
+  @Resource
+  private RoleMapper roleMapper;
 
-    @Resource
-    private RelationMapper relationMapper;
+  @Resource
+  private RelationMapper relationMapper;
 
-    @Override
-    @Transactional(readOnly = false)
-    public void setAuthority(Integer roleId, String ids) {
+  @Override
+  @Transactional(readOnly = false)
+  public void setAuthority(Integer roleId, String ids) {
 
-        // 删除该角色所有的权限
-        this.roleMapper.deleteRolesById(roleId);
+    // 删除该角色所有的权限
+    this.roleMapper.deleteRolesById(roleId);
 
-        // 添加新的权限
-        for (Long id : Convert.toLongArray(true, Convert.toStrArray(",", ids))) {
-            Relation relation = new Relation();
-            relation.setRoleid(roleId);
-            relation.setMenuid(id);
-            this.relationMapper.insert(relation);
-        }
+    // 添加新的权限
+    for (Long id : Convert.toLongArray(true, Convert.toStrArray(",", ids))) {
+      Relation relation = new Relation();
+      relation.setRoleid(roleId);
+      relation.setMenuid(id);
+      this.relationMapper.insert(relation);
     }
+  }
 
-    @Override
-    @Transactional(readOnly = false)
-    public void delRoleById(Integer roleId) {
-        //删除角色
-        this.roleMapper.deleteById(roleId);
+  @Override
+  @Transactional(readOnly = false)
+  public void delRoleById(Integer roleId) {
+    //删除角色
+    this.roleMapper.deleteById(roleId);
 
-        // 删除该角色所有的权限
-        this.roleMapper.deleteRolesById(roleId);
-    }
+    // 删除该角色所有的权限
+    this.roleMapper.deleteRolesById(roleId);
+  }
 
-    @Override
-    public List<Map<String, Object>> selectRoles(String condition) {
-        return this.baseMapper.selectRoles(condition);
-    }
+  @Override
+  public List<Map<String, Object>> selectRoles(String condition) {
+    return this.baseMapper.selectRoles(condition);
+  }
 
-    @Override
-    public int deleteRolesById(Integer roleId) {
-        return this.baseMapper.deleteRolesById(roleId);
-    }
+  @Override
+  public int deleteRolesById(Integer roleId) {
+    return this.baseMapper.deleteRolesById(roleId);
+  }
 
-    @Override
-    public List<ZTreeNode> roleTreeList() {
-        return this.baseMapper.roleTreeList();
-    }
+  @Override
+  public List<ZTreeNode> roleTreeList() {
+    return this.baseMapper.roleTreeList();
+  }
 
-    @Override
-    public List<ZTreeNode> roleTreeListByRoleId(String[] roleId) {
-        return this.baseMapper.roleTreeListByRoleId(roleId);
-    }
+  @Override
+  public List<ZTreeNode> roleTreeListByRoleId(String[] roleId) {
+    return this.baseMapper.roleTreeListByRoleId(roleId);
+  }
 
 }

@@ -17,8 +17,8 @@ import java.util.Map;
  */
 public interface ILoginLogService extends IService<LoginLog> {
 
-    /**
-     * 获取登录日志列表
-     */
-    List<Map<String, Object>> getLoginLogs(Page<LoginLog> page, String beginTime, String endTime, String logName, String orderByField, boolean asc);
+  /**
+   * 获取登录日志列表
+   */
+  List<Map<String, Object>> getLoginLogs(Page<LoginLog> page, String beginTime, String endTime, String logName, String orderByField, boolean asc);
 }

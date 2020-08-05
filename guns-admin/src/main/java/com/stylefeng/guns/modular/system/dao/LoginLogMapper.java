@@ -18,10 +18,10 @@ import java.util.Map;
  */
 public interface LoginLogMapper extends BaseMapper<LoginLog> {
 
-    /**
-     * 获取登录日志
-     */
-    List<Map<String, Object>> getLoginLogs(@Param("page") Page<LoginLog> page, @Param("beginTime") String beginTime,
-                                           @Param("endTime") String endTime, @Param("logName") String logName, @Param("orderByField") String orderByField, @Param("isAsc") boolean isAsc);
+  /**
+   * 获取登录日志
+   */
+  List<Map<String, Object>> getLoginLogs(@Param("page") Page<LoginLog> page, @Param("beginTime") String beginTime,
+                                         @Param("endTime") String endTime, @Param("logName") String logName, @Param("orderByField") String orderByField, @Param("isAsc") boolean isAsc);
 
 }

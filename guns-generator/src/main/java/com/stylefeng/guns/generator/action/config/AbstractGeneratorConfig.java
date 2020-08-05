@@ -23,87 +23,87 @@ import java.util.List;
  */
 public abstract class AbstractGeneratorConfig {
 
-    /**
-     * mybatis-plus代码生成器配置
-     */
-    GlobalConfig globalConfig = new GlobalConfig();
+  /**
+   * mybatis-plus代码生成器配置
+   */
+  GlobalConfig globalConfig = new GlobalConfig();
 
-    DataSourceConfig dataSourceConfig = new DataSourceConfig();
+  DataSourceConfig dataSourceConfig = new DataSourceConfig();
 
-    StrategyConfig strategyConfig = new StrategyConfig();
+  StrategyConfig strategyConfig = new StrategyConfig();
 
-    PackageConfig packageConfig = new PackageConfig();
+  PackageConfig packageConfig = new PackageConfig();
 
-    TableInfo tableInfo = null;
+  TableInfo tableInfo = null;
 
-    /**
-     * Guns代码生成器配置
-     */
-    ContextConfig contextConfig = new ContextConfig();
+  /**
+   * Guns代码生成器配置
+   */
+  ContextConfig contextConfig = new ContextConfig();
 
-    SqlConfig sqlConfig = new SqlConfig();
+  SqlConfig sqlConfig = new SqlConfig();
 
-    protected abstract void config();
+  protected abstract void config();
 
-    public void init() {
-        config();
+  public void init() {
+    config();
 
-        packageConfig.setService(contextConfig.getProPackage() + ".modular." + contextConfig.getModuleName() + ".service");
-        packageConfig.setServiceImpl(contextConfig.getProPackage() + ".modular." + contextConfig.getModuleName() + ".service.impl");
+    packageConfig.setService(contextConfig.getProPackage() + ".modular." + contextConfig.getModuleName() + ".service");
+    packageConfig.setServiceImpl(contextConfig.getProPackage() + ".modular." + contextConfig.getModuleName() + ".service.impl");
 
-        //controller没用掉,生成之后会自动删掉
-        packageConfig.setController("TTT");
+    //controller没用掉,生成之后会自动删掉
+    packageConfig.setController("TTT");
 
-        if (!contextConfig.getEntitySwitch()) {
-            packageConfig.setEntity("TTT");
-        }
-
-        if (!contextConfig.getDaoSwitch()) {
-            packageConfig.setMapper("TTT");
-            packageConfig.setXml("TTT");
-        }
-
-        if (!contextConfig.getServiceSwitch()) {
-            packageConfig.setService("TTT");
-            packageConfig.setServiceImpl("TTT");
-        }
-
+    if (!contextConfig.getEntitySwitch()) {
+      packageConfig.setEntity("TTT");
     }
 
-    /**
-     * 删除不必要的代码
-     */
-    public void destory() {
-        String outputDir = globalConfig.getOutputDir() + "/TTT";
-        FileUtil.deleteDir(new File(outputDir));
+    if (!contextConfig.getDaoSwitch()) {
+      packageConfig.setMapper("TTT");
+      packageConfig.setXml("TTT");
     }
 
-    public AbstractGeneratorConfig() {
+    if (!contextConfig.getServiceSwitch()) {
+      packageConfig.setService("TTT");
+      packageConfig.setServiceImpl("TTT");
     }
 
-    public void doMpGeneration() {
-        init();
-        AutoGenerator autoGenerator = new AutoGenerator();
-        autoGenerator.setGlobalConfig(globalConfig);
-        autoGenerator.setDataSource(dataSourceConfig);
-        autoGenerator.setStrategy(strategyConfig);
-        autoGenerator.setPackageInfo(packageConfig);
-        autoGenerator.execute();
-        destory();
+  }
 
-        //获取table信息,用于guns代码生成
-        List<TableInfo> tableInfoList = autoGenerator.getConfig().getTableInfoList();
-        if (tableInfoList != null && tableInfoList.size() > 0) {
-            this.tableInfo = tableInfoList.get(0);
-        }
-    }
+  /**
+   * 删除不必要的代码
+   */
+  public void destory() {
+    String outputDir = globalConfig.getOutputDir() + "/TTT";
+    FileUtil.deleteDir(new File(outputDir));
+  }
 
-    public void doGunsGeneration() {
-        GunsTemplateEngine GunsTemplateEngine = new SimpleTemplateEngine();
-        GunsTemplateEngine.setContextConfig(contextConfig);
-        sqlConfig.setConnection(dataSourceConfig.getConn());
-        GunsTemplateEngine.setSqlConfig(sqlConfig);
-        GunsTemplateEngine.setTableInfo(tableInfo);
-        GunsTemplateEngine.start();
+  public AbstractGeneratorConfig() {
+  }
+
+  public void doMpGeneration() {
+    init();
+    AutoGenerator autoGenerator = new AutoGenerator();
+    autoGenerator.setGlobalConfig(globalConfig);
+    autoGenerator.setDataSource(dataSourceConfig);
+    autoGenerator.setStrategy(strategyConfig);
+    autoGenerator.setPackageInfo(packageConfig);
+    autoGenerator.execute();
+    destory();
+
+    //获取table信息,用于guns代码生成
+    List<TableInfo> tableInfoList = autoGenerator.getConfig().getTableInfoList();
+    if (tableInfoList != null && tableInfoList.size() > 0) {
+      this.tableInfo = tableInfoList.get(0);
     }
+  }
+
+  public void doGunsGeneration() {
+    GunsTemplateEngine GunsTemplateEngine = new SimpleTemplateEngine();
+    GunsTemplateEngine.setContextConfig(contextConfig);
+    sqlConfig.setConnection(dataSourceConfig.getConn());
+    GunsTemplateEngine.setSqlConfig(sqlConfig);
+    GunsTemplateEngine.setTableInfo(tableInfo);
+    GunsTemplateEngine.start();
+  }
 }
